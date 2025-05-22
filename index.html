@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Overall grid container */
+        html {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            /* 7 equal columns */
+
+            background-color: #f1f1f1;
+
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Grid item styling */
+        .grid-item {
+            background-color: #ffffff;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            font-size: 30px;
+
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* When the grid item is selected (clicked) */
+        .grid-item.green {
+            background-color: green;
+            color: white;
+            transform: scale(1.1);
+            /* Slightly enlarge */
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.5);
+            /* Glow effect */
+        }
+
+        /* Hover effect to make the grid item grow slightly */
+        .grid-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Smooth transition when the page loads */
+        .grid-container {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lock In.</h1>
+    <h2>Task: 30 minutes exercise</h2>
+
+    <div class="grid-container">
+        <div class="grid-item" data-index="0">1</div>
+        <div class="grid-item" data-index="1">2</div>
+        <div class="grid-item" data-index="2">3</div>
+        <div class="grid-item" data-index="3">4</div>
+        <div class="grid-item" data-index="4">5</div>
+        <div class="grid-item" data-index="5">6</div>
+        <div class="grid-item" data-index="6">7</div>
+    </div>
+
+    <script>
+        // Get all the grid items
+        const gridItems = document.querySelectorAll('.grid-item');
+
+        // Function to load the grid item states from localStorage
+        function loadGridState() {
+            gridItems.forEach(item => {
+                const index = item.getAttribute('data-index');
+                const state = localStorage.getItem('gridItem-' + index);
+                if (state === 'green') {
+                    item.classList.add('green');
+                }
+            });
+        }
+
+        // Function to save the grid item state to localStorage
+        function saveGridState(index, state) {
+            localStorage.setItem('gridItem-' + index, state);
+        }
+
+        // Add click event listeners to each grid item
+        gridItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const index = item.getAttribute('data-index');
+
+                // Toggle the green class and update localStorage
+                if (item.classList.contains('green')) {
+                    item.classList.remove('green');
+                    saveGridState(index, 'white');
+                } else {
+                    item.classList.add('green');
+                    saveGridState(index, 'green');
+                }
+            });
+        });
+
+        // Load the saved states when the page loads
+        loadGridState();
+    </script>
+</body>
+
+</html>
