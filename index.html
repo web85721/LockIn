@@ -7,6 +7,28 @@
     <title>Document</title>
     <style>
         /* Overall grid container */
+        .grid-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .grid-item:hover::after {
+            opacity: 1;
+        }
+
         html {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
@@ -65,22 +87,52 @@
                 opacity: 1;
             }
         }
+
+        .grid-item[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background-color: #3c3c3c;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 14px;
+            z-index: 10;
+            opacity: 3;
+            pointer-events: none;
+
+        }
+
+        .grid-item[data-tooltip] {
+            position: relative;
+        }
     </style>
 </head>
 
 <body>
+    <a href="main.html" target="_blank">Other page</a>
+
     <h1>Lock In.</h1>
     <h2>Task: 30 minutes exercise</h2>
-    <h3>500 jump rope, 4(15 lunges, 30 squats), 8x push and pull</h3>
-
+    <h3>5/21/25</h3>
     <div class="grid-container">
-        <div class="grid-item" data-index="0">1</div>
-        <div class="grid-item" data-index="1">2</div>
-        <div class="grid-item" data-index="2">3</div>
-        <div class="grid-item" data-index="3">4</div>
-        <div class="grid-item" data-index="4">5</div>
-        <div class="grid-item" data-index="5">6</div>
-        <div class="grid-item" data-index="6">7</div>
+        <div class="grid-item" data-index="0" data-tooltip="500 jumprope">1</div>
+        <div class="grid-item" data-index="1" data-tooltip="4x(15 lunges, 10 jumps, 30 squats)">2</div>
+        <div class="grid-item" data-index="2" data-tooltip="8x(pulls and X)">3</div>
+        <div class="grid-item" data-index="3" data-tooltip="500 jumprope">4</div>
+        <div class="grid-item" data-index="4" data-tooltip="4x(15 lunges, 10 jumps, 30 squats)">5</div>
+        <div class=" grid-item" data-index="5" data-tooltip="8x(pulls and X)">6</div>
+        <div class="grid-item" data-index="6" data-tooltip="500 jumprope">7</div>
+        <div class="grid-item" data-index="7" data-tooltip="">8</div>
+        <div class="grid-item" data-index="8" data-tooltip="">9</div>
+        <div class="grid-item" data-index="9" data-tooltip="">10</div>
+        <div class="grid-item" data-index="10" data-tooltip="">11</div>
+        <div class="grid-item" data-index="11" data-tooltip="">12</div>
+        <div class="grid-item" data-index="12" data-tooltip="">13</div>
+        <div class="grid-item" data-index="13" data-tooltip="">14</div>
     </div>
 
     <script>
