@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+
     <style>
         * {
             box-sizing: border-box;
@@ -107,52 +107,47 @@
     <a href="home.html" target="_blank">Home</a>
 
     <h1>Lock In.</h1>
-    <h2>Task: 30 minutes exercise</h2>
-    <h3>5/21/25</h3>
+    <h2>Task: Youtube</h2>
+    <h3>5/28/25</h3>
     <div class="grid-wrapper">
         <div class="grid-container">
-            <div class="grid-item" data-index="0" data-tooltip="500 jumprope">1</div>
-            <div class="grid-item" data-index="1" data-tooltip="4x(15 lunges, 10 jumps, 30 squats)">2</div>
-            <div class="grid-item" data-index="2" data-tooltip="8x(pulls and X)">3</div>
-            <div class="grid-item" data-index="3" data-tooltip="500 jumprope">4</div>
-            <div class="grid-item" data-index="4" data-tooltip="4x(15 lunges, 10 jumps, 30 squats)">5</div>
-            <div class=" grid-item" data-index="5" data-tooltip="8x(pulls and X)">6</div>
-            <div class="grid-item" data-index="6" data-tooltip="500 jumprope">7</div>
-            <div class="grid-item" data-index="7" data-tooltip="">8</div>
-            <div class="grid-item" data-index="8" data-tooltip="">9</div>
-            <div class="grid-item" data-index="9" data-tooltip="">10</div>
-            <div class="grid-item" data-index="10" data-tooltip="">11</div>
-            <div class="grid-item" data-index="11" data-tooltip="">12</div>
-            <div class="grid-item" data-index="12" data-tooltip="">13</div>
-            <div class="grid-item" data-index="13" data-tooltip="">14</div>
+            <div class="grid-item" data-index="0">1</div>
+            <div class="grid-item" data-index="1">2</div>
+            <div class="grid-item" data-index="2">3</div>
+            <div class="grid-item" data-index="3">4</div>
+            <div class="grid-item" data-index="4">5</div>
+            <div class=" grid-item" data-index="5"> 6</div>
+            <div class=" grid-item" data-index="6">7</div>
+            <div class="grid-item" data-index="7">8</div>
+            <div class="grid-item" data-index="8">9</div>
+            <div class="grid-item" data-index="9">10</div>
+            <div class="grid-item" data-index="10">11</div>
+            <div class="grid-item" data-index="11">12</div>
+            <div class="grid-item" data-index="12">13</div>
+            <div class="grid-item" data-index="13">14</div>
         </div>
     </div>
     <script>
-        // Get all the grid items
+        const storagePrefix = 'youtubeTask-'; // Unique identifier for this page
         const gridItems = document.querySelectorAll('.grid-item');
 
-        // Function to load the grid item states from localStorage
         function loadGridState() {
             gridItems.forEach(item => {
                 const index = item.getAttribute('data-index');
-                const state = localStorage.getItem('gridItem-' + index);
+                const state = localStorage.getItem(storagePrefix + 'gridItem-' + index);
                 if (state === 'green') {
                     item.classList.add('green');
                 }
             });
         }
 
-        // Function to save the grid item state to localStorage
         function saveGridState(index, state) {
-            localStorage.setItem('gridItem-' + index, state);
+            localStorage.setItem(storagePrefix + 'gridItem-' + index, state);
         }
 
-        // Add click event listeners to each grid item
         gridItems.forEach(item => {
             item.addEventListener('click', () => {
                 const index = item.getAttribute('data-index');
-
-                // Toggle the green class and update localStorage
                 if (item.classList.contains('green')) {
                     item.classList.remove('green');
                     saveGridState(index, 'white');
@@ -163,9 +158,9 @@
             });
         });
 
-        // Load the saved states when the page loads
         loadGridState();
     </script>
+
 </body>
 
 </html>
